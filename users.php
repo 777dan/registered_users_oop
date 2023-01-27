@@ -3,7 +3,7 @@ require "user.php";
 class Users
 {
     private $name;
-    private $users;
+    public $users;
 
     public function __construct($users)
     {
@@ -32,27 +32,21 @@ class Users
     {
         return $this->name = $name;;
     }
-    public function __toString()
-    {
-        $string = $this->name;
-        foreach ($this->users as $key => $user) {
-            $string .= " " . $user->getLogin();
-        }
-        return $string;
-    }
     public function toAddUser($user)
     {
         if ($this->toCheckLogin($user->getLogin())) {
-            echo "Такой пользовательно уже существует";
-        } else {
-            $this->users[] = $user;
+            return true;
         }
+        return false;
     }
     public function toDeleteUser($searchedUser)
     {
         foreach ($this->users as $key => $user) {
-            if ($searchedUser === $user->login) unset($this->users[$key]);
+            if ($searchedUser === $user->login) {
+                return $key;
+            }
         }
+        return false;
     }
     public function IsValid($login, $password)
     {
@@ -69,5 +63,13 @@ class Users
                 return true;
         }
         return false;
+    }
+    public function __toString()
+    {
+        $string = $this->name;
+        foreach ($this->users as $key => $user) {
+            $string .= " " . $user->getLogin();
+        }
+        return $string;
     }
 }
