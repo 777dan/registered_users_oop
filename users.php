@@ -37,7 +37,10 @@ class Users
         if ($this->toCheckLogin($user->getLogin())) {
             return true;
         }
-        return false;
+        else {
+            $this->users[] = $user;
+            return false;
+        }
     }
     public function toDeleteUser($searchedUser)
     {
@@ -45,8 +48,8 @@ class Users
             if ($searchedUser === $user->login) {
                 return $key;
             }
+            return false;
         }
-        return false;
     }
     public function IsValid($login, $password)
     {
