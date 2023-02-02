@@ -45,11 +45,9 @@ class Users
     public function toDeleteUser($searchedUser)
     {
         foreach ($this->users as $key => $user) {
-            if ($searchedUser === $user->login) {
-                return $key;
-            }
-            return false;
+            if ($searchedUser === $user->login) unset($this->users[$key]);
         }
+        return false;
     }
     public function IsValid($login, $password)
     {

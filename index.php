@@ -9,8 +9,5 @@ if ($users->toAddUser(new User("Greg", "123"))) {
     echo "Такой пользовательно уже существует";
 }
 $users->users;
-if ($users->toDeleteUser("Greg")) {
-    $key = $users->toDeleteUser("Greg");
-    unset($users->users[$key]);
-}
+$users->toDeleteUser("Greg");
 echo trim($users);
