@@ -35,17 +35,18 @@ class Users
     public function toAddUser($user)
     {
         if ($this->toCheckLogin($user->getLogin())) {
-            return true;
+            return false;
         }
         else {
             $this->users[] = $user;
-            return false;
+            return true;
         }
     }
     public function toDeleteUser($searchedUser)
     {
         foreach ($this->users as $key => $user) {
             if ($searchedUser === $user->login) unset($this->users[$key]);
+            return true;
         }
         return false;
     }
